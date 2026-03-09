@@ -1,60 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simple Contact Form</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync Admin</title>
 
-  <form action="/submit" method="post">
-    <div>
-      <label for="name">Name</label><br />
-      <input id="name" name="name" type="text" placeholder="Enter name" required />
-    </div>
+    <!-- Optional: Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
 
-    <div style="margin-top:8px;">
-      <label for="email">Email</label><br />
-      <input id="email" name="email" type="email" placeholder="Enter email" required />
-    </div>
+  <body>
+    <!-- React mounts here -->
+    <div id="root"></div>
 
-    <div style="margin-top:12px;">
-      <button type="submit">Submit</button>
-    </div>
-  </form>
-  <table border="1" cellpadding="6" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Head 1</th>
-      <th>Head 2</th>
-      <th>Head 3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Row1 Col1</td>
-      <td>Row1 Col2</td>
-      <td>Row1 Col3</td>
-    </tr>
-    <tr>
-      <td>Row2 Col1</td>
-      <td>Row2 Col2</td>
-      <td>Row2 Col3</td>
-    </tr>
-    <tr>
-      <td>Row3 Col1</td>
-      <td>Row3 Col2</td>
-      <td>Row3 Col3</td>
-    </tr>
-  </tbody>
-</table>
-
-  <ul style="list-style:none; padding:0; margin:0; display:flex; gap:12px;">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-
-
-</body>
+    <!-- Vite React entry -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

@@ -82,10 +82,10 @@ app.use('/uploads', express.static(uploadsDir));
 
 // --- MYSQL CONNECTION ---
 const connection = mysql.createConnection({
+  host: 'localhost',
   user: 'root',
   password: '@dityAsingh',
-  database: 'civicsync',
-  socketPath: '/tmp/mysql.sock'
+  database: 'civicsync'
 });
 
 connection.connect(err => {
