@@ -32,3 +32,4 @@ const ReportSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('report', ReportSchema);
+    
