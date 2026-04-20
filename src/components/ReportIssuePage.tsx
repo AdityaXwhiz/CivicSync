@@ -358,4 +358,4 @@ export const ReportIssuePage = () => {
       </Tabs>
     </div>
   );
-};
+};  

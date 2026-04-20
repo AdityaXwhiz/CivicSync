@@ -4,7 +4,14 @@ import { Users, Award, Heart, Lightbulb } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import Chatbot from "./Chatbot";
+import useVoiceAssistant from "../hooks/useVoiceAssistant";
+
+
+
+
 export const HeroSection = () => {
+  const { listening, startListening } = useVoiceAssistant();
   const [stats, setStats] = useState({
     activeCitizens: '...',
     issuesResolved: '...',
@@ -77,6 +84,25 @@ export const HeroSection = () => {
             <p className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed max-w-3xl mx-auto">
               Spot an issue? Report it instantly. Track its progress in real-time. Join your neighbors in building a better community.
             </p>
+            <div className="mt-4 text-sm md:text-base text-yellow-200 font-medium">
+              🎤 Voice Assistant: {listening ? "Listening..." : "Click mic and say 'Hey CivicSync'"}
+            </div>
+
+            <div className="mt-4">
+              <button
+                onClick={() => {
+                  startListening();
+
+                  const msg = new window.SpeechSynthesisUtterance(
+                    "Voice assistant activated"
+                  );
+                  window.speechSynthesis.speak(msg);
+                }}
+                className="bg-yellow-300 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition"
+              >
+                🎤 Start Voice Assistant
+              </button>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="bg-transparent text-white border-2 border-white hover:bg-white/20 text-lg px-8 py-4 backdrop-blur-sm transition-all duration-300">
@@ -116,6 +142,8 @@ export const HeroSection = () => {
           </div>
         </div>
       </section>
+    {/* Chatbot */}
+    <Chatbot />
     </>
   );
 };

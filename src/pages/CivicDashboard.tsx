@@ -2,7 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/HeroSection";
 import { ProcessFlow } from "@/components/ProcessFlow";
 import { CivicResponsibilities } from "@/components/CivicResponsibilities";
-import { useVoiceAssistant } from "@/hooks/useVoiceAssistant";
+import useVoiceAssistant from '../hooks/useVoiceAssistant';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -14,36 +14,7 @@ const CivicDashboard = () => {
   const [locationText, setLocationText] = useState<string>("");
   const [showVoicePopup, setShowVoicePopup] = useState(false);
 
-  const { isVoiceActive, startListening } = useVoiceAssistant((text: string) => {
-    console.log("Voice command detected:", text);
-
-    setHeardText(text);
-    setShowVoicePopup(true);
-
-    // Fetch location automatically
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        const loc = `Lat: ${latitude.toFixed(4)}, Lng: ${longitude.toFixed(4)}`;
-        setLocationText(loc);
-
-        // After showing popup briefly redirect to report page
-        setTimeout(() => {
-          navigate("/report-issue", {
-            state: {
-              voiceText: text,
-              latitude,
-              longitude
-            }
-          });
-        }, 3000);
-      });
-    } else {
-      navigate("/report-issue", {
-        state: { voiceText: text }
-      });
-    }
-  });
+  const { listening: isVoiceActive } = useVoiceAssistant();
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,9 +24,6 @@ const CivicDashboard = () => {
           className="fixed bottom-8 right-8 z-40 bg-primary text-white p-4 rounded-full shadow-lg hover:scale-105 transition"
           title="Voice Assistant"
           onClick={() => {
-            // Start the voice assistant (permission is handled in the hook)
-            startListening();
-
             const msg = new SpeechSynthesisUtterance(
               "Voice assistant activated. Say Hey Civic Sync to report an issue."
             );

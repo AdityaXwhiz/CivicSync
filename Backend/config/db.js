@@ -1,25 +1,22 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
-// Create a connection using the socket
+// Create a connection to Railway MySQL
 const connection = mysql.createConnection({
+  host: 'metro.proxy.rlwy.net',
   user: 'root',
-  password: '@dityAsingh',   // replace with your MySQL root password
-  database: 'civicsync',   // replace with your DB name
-  socketPath: '/tmp/mysql.sock' // important on macOS
+  password: process.env.DB_PASSWORD,
+  database: 'railway',
+  port: 52371
 });
 
 // Connect
 connection.connect(err => {
   if (err) {
-    console.error('❌ MySQL connection failed:', err);
+    console.error('❌ DB connection failed:', err);
   } else {
-    console.log('✅ MySQL connected via socket!');
+    console.log('✅ Connected to Railway MySQL');
   }
 });
 
-// Example: test query
-connection.query('SELECT NOW() AS currentTime', (err, results) => {
-  if (err) throw err;
-  console.log('Current time from MySQL:', results[0].currentTime);
-  connection.end();
-});
+module.exports = connection;

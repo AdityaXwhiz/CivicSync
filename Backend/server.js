@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
+const axios = require('axios');
 // --- ADDED FOR REAL-TIME ---
 const http = require('http');
 const { Server } = require('socket.io');
@@ -508,6 +510,47 @@ app.put('/api/posts/:id/like', (req, res) => {
         if (result.affectedRows === 0) return res.status(404).json({ msg: 'Post not found' });
         res.json({ msg: 'Post liked successfully!' });
     });
+});
+
+// --- VOICE ASSISTANT ROUTE ---
+app.post('/api/voice', async (req, res) => {
+  const { query } = req.body;
+
+  if (!query) {
+    return res.status(400).json({ reply: "No query provided" });
+  }
+
+  try {
+    const response = await axios.post(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        model: "openai/gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "You are CivicSync AI assistant. Help users with civic issues, reporting problems, NGOs, and platform usage in a helpful and concise way."
+          },
+          {
+            role: "user",
+            content: query
+          }
+        ]
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    const reply = response.data.choices[0].message.content;
+
+    res.json({ reply });
+  } catch (error) {
+    console.error("Voice API error:", error.response?.data || error.message);
+    res.status(500).json({ reply: "Sorry, something went wrong." });
+  }
 });
 
 // --- START SERVER ---
