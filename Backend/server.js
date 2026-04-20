@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // In production, restrict this to your frontend's domain
+    origin: "https://civicsync-frontend.onrender.com",
     methods: ["GET", "POST", "PUT"]
   }
 });
