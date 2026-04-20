@@ -56,7 +56,7 @@ export default function NgoPortalPage() {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch('http://localhost:5001/api/ngos');
+      const response = await fetch('https://civicsync-so4u.onrender.com/api/ngos');
       if (!response.ok) {
         throw new Error('Failed to fetch NGOs. Please try again later.');
       }
@@ -90,7 +90,7 @@ export default function NgoPortalPage() {
     e.preventDefault();
     setFormMessage(null); // Clear previous messages
     try {
-      const response = await fetch('http://localhost:5001/api/ngos', {
+      const response = await fetch('https://civicsync-so4u.onrender.com/api/ngos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formState),

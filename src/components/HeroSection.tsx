@@ -21,7 +21,7 @@ export const HeroSection = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/hero-stats');
+        const response = await fetch('https://civicsync-so4u.onrender.com/api/hero-stats');
         if (!response.ok) {
           throw new Error('Failed to fetch stats');
         }

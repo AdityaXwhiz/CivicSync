@@ -169,7 +169,7 @@ export const ReportIssuePage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/reports", {
+      const response = await fetch("https://civicsync-so4u.onrender.com/api/reports", {
         method: "POST",
         body: reportData,
       });

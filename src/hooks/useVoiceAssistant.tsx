@@ -65,7 +65,7 @@ export default function useVoiceAssistant() {
   };
 
   const fetchResponse = async (query: string) => {
-    const res = await fetch("http://localhost:5001/api/voice", {
+    const res = await fetch("https://civicsync-so4u.onrender.com/api/voice", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

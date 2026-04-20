@@ -57,7 +57,7 @@ export default function LiveReportMap() {
             try {
                 setLoading(true);
                 setError(null);
-                const response = await fetch('http://localhost:5001/api/reports');
+                const response = await fetch('https://civicsync-so4u.onrender.com/api/reports');
                 if (!response.ok) {
                     throw new Error('Failed to fetch reports. Is the server running?');
                 }

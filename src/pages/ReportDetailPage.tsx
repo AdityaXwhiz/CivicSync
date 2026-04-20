@@ -43,7 +43,7 @@ export default function ReportDetailPage() {
   const fetchData = async () => {
     try {
       // Fetch report details
-      const reportResponse = await fetch(`http://localhost:5001/api/reports/${id}`);
+      const reportResponse = await fetch(`https://civicsync-so4u.onrender.com/api/reports/${id}`);
       if (!reportResponse.ok) throw new Error('Report not found');
       const reportData = await reportResponse.json();
       // **FIX**: Parse the 'details' field from JSON string to an object
@@ -53,7 +53,7 @@ export default function ReportDetailPage() {
       setReport(reportData);
 
       // Fetch comments for the report
-      const commentsResponse = await fetch(`http://localhost:5001/api/reports/${id}/comments`);
+      const commentsResponse = await fetch(`https://civicsync-so4u.onrender.com/api/reports/${id}/comments`);
       if (!commentsResponse.ok) throw new Error('Could not fetch comments');
       const commentsData = await commentsResponse.json();
       setComments(commentsData);
@@ -77,7 +77,7 @@ export default function ReportDetailPage() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5001/api/reports/${id}/comments`, {
+      const response = await fetch(`https://civicsync-so4u.onrender.com/api/reports/${id}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userName, commentText: newComment }),
@@ -163,7 +163,7 @@ export default function ReportDetailPage() {
           {report.voice_note_url && (
             <div>
               <h3 className="text-lg font-semibold mb-2">Voice Note</h3>
-              <audio controls src={`http://localhost:5001${report.voice_note_url}`} className="w-full">
+              <audio controls src={`https://civicsync-so4u.onrender.com${report.voice_note_url}`} className="w-full">
                 Your browser does not support the audio element.
               </audio>
             </div>
@@ -175,9 +175,9 @@ export default function ReportDetailPage() {
               <h3 className="text-lg font-semibold mb-2">Submitted Images</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {imageUrls.map((path, index) => (
-                  <a href={`http://localhost:5001${path}`} target="_blank" rel="noopener noreferrer" key={index}>
+                  <a href={`https://civicsync-so4u.onrender.com${path}`} target="_blank" rel="noopener noreferrer" key={index}>
                     <img
-                      src={`http://localhost:5001${path}`}
+                      src={`https://civicsync-so4u.onrender.com${path}`}
                       alt={`Report evidence ${index + 1}`}
                       className="rounded-lg object-cover aspect-square hover:opacity-80 transition-opacity"
                     />

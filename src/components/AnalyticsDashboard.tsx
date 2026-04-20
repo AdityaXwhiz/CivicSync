@@ -15,7 +15,7 @@ export const AnalyticsDashboard = () => {
     const fetchAnalytics = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5001/api/analytics');
+        const response = await fetch('https://civicsync-so4u.onrender.com/api/analytics');
         if (!response.ok) {
           throw new Error('Failed to fetch analytics data from server.');
         }

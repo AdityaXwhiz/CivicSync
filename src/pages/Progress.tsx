@@ -29,7 +29,7 @@ const Progress: React.FC = () => {
     useEffect(() => {
         const fetchReports = async () => {
             try {
-                const res = await fetch('http://localhost:5001/api/reports');
+                const res = await fetch('https://civicsync-so4u.onrender.com/api/reports');
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
                 setReports(data);

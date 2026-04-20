@@ -23,7 +23,7 @@ interface Report {
 }
 
 // ✅ FIX: Initialize socket connection outside the component
-const socket: Socket = io("http://localhost:5001");
+const socket: Socket = io("https://civicsync-so4u.onrender.com");
 
 const statusStyles: { [key in ReportStatus]: string } = {
   Pending: 'bg-yellow-100/50 text-yellow-800 border-yellow-300 dark:bg-yellow-900/20 dark:text-yellow-300 dark:border-yellow-700',
@@ -44,7 +44,7 @@ const getFirstImageUrl = (report: Report): string | null => {
         urls = [image_urls];
     }
 
-    if (urls.length > 0 && urls[0]) return `http://localhost:5001${urls[0]}`;
+    if (urls.length > 0 && urls[0]) return `https://civicsync-so4u.onrender.com${urls[0]}`;
     return null;
 };
 
@@ -66,7 +66,7 @@ const CaseManagement: React.FC = () => {
     useEffect(() => {
         const fetchAllReports = async () => {
             try {
-                const res = await fetch("http://localhost:5001/api/reports");
+                const res = await fetch("https://civicsync-so4u.onrender.com/api/reports");
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
                 setAllReports(data);
@@ -128,7 +128,7 @@ const CaseManagement: React.FC = () => {
         // Optimistic update is no longer needed as the socket event will handle it,
         // but we still need to send the request to the server.
         try {
-            await fetch(`http://localhost:5001/api/reports/${reportId}/status`, {
+            await fetch(`https://civicsync-so4u.onrender.com/api/reports/${reportId}/status`, {
                 method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: newStatus }),
             });
         } catch (err) {
@@ -145,7 +145,7 @@ const CaseManagement: React.FC = () => {
         
         try {
             // NOTE: This endpoint needs to be created in your server.js
-            await fetch(`http://localhost:5001/api/reports/${reportId}/deadline`, {
+            await fetch(`https://civicsync-so4u.onrender.com/api/reports/${reportId}/deadline`, {
                 method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ deadline: newDeadline }),
             });
         } catch (err) {

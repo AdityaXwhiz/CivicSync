@@ -26,7 +26,7 @@ const alertStyles = {
 
 type DeadlineStatus = keyof typeof alertStyles;
 
-const socket: Socket = io("http://localhost:5001");
+const socket: Socket = io("https://civicsync-so4u.onrender.com");
 
 const getDeadlineInfo = (report: ActionableReport): { status: DeadlineStatus; text: string } => {
     const today = new Date();
@@ -62,7 +62,7 @@ export const AlertsPage: React.FC = () => {
     useEffect(() => {
         const fetchAlerts = async () => {
             try {
-                const response = await fetch("http://localhost:5001/api/alerts/actionable");
+                const response = await fetch("https://civicsync-so4u.onrender.com/api/alerts/actionable");
                 if (!response.ok) {
                     throw new Error(`Server responded with ${response.status}`);
                 }

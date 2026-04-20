@@ -23,7 +23,7 @@ export default function Reports() {
         Object.entries(filters).filter(([, value]) => value !== '')
       );
       const queryParams = new URLSearchParams(activeFilters).toString();
-      const response = await fetch(`http://localhost:5001/api/reports?${queryParams}`);
+      const response = await fetch(`https://civicsync-so4u.onrender.com/api/reports?${queryParams}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -128,7 +128,7 @@ export default function Reports() {
                       <Label className="text-xs font-semibold text-muted-foreground">Voice Note</Label>
                       <audio
                         controls
-                        src={`http://localhost:5001${report.voice_note_url}`}
+                        src={`https://civicsync-so4u.onrender.com${report.voice_note_url}`}
                         className="w-full h-10 mt-1"
                       >
                         Your browser does not support the audio element.
@@ -141,9 +141,9 @@ export default function Reports() {
                         <Label className="text-xs font-semibold text-muted-foreground">Image Evidence</Label>
                         <div className="flex gap-2 overflow-x-auto pt-2 pb-2">
                           {imageUrls.map((path: string, index: number) => (
-                            <a href={`http://localhost:5001${path}`} target="_blank" rel="noopener noreferrer" key={index}>
+                            <a href={`https://civicsync-so4u.onrender.com${path}`} target="_blank" rel="noopener noreferrer" key={index}>
                               <img
-                                src={`http://localhost:5001${path}`}
+                                src={`https://civicsync-so4u.onrender.com${path}`}
                                 alt={`Report image ${index + 1}`}
                                 className="h-28 w-28 object-cover rounded-md border hover:opacity-80 transition-opacity"
                               />

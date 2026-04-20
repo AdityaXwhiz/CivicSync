@@ -31,7 +31,7 @@ const getImageUrls = (imageUrls: string | string[] | null): string[] => {
         urls = [imageUrls];
     }
     
-    return urls.map(url => `http://localhost:5001${url}`);
+    return urls.map(url => `https://civicsync-so4u.onrender.com${url}`);
 };
 
 export const ReportDetailPage: React.FC = () => {
@@ -41,7 +41,7 @@ export const ReportDetailPage: React.FC = () => {
     const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5001/api/reports/${id}`)
+        fetch(`https://civicsync-so4u.onrender.com/api/reports/${id}`)
             .then(res => res.json())
             .then(data => setReport(data))
             .catch(err => console.error("Failed to fetch report details:", err))
@@ -52,7 +52,7 @@ export const ReportDetailPage: React.FC = () => {
     if (!report) return <p className="p-6 text-destructive">Report not found.</p>;
 
     const imageUrls = getImageUrls(report.image_urls);
-    const audioUrl = report.voice_note_url ? `http://localhost:5001${report.voice_note_url}` : null;
+    const audioUrl = report.voice_note_url ? `https://civicsync-so4u.onrender.com${report.voice_note_url}` : null;
 
     const handleNextImage = (e: React.MouseEvent) => {
         e.stopPropagation();

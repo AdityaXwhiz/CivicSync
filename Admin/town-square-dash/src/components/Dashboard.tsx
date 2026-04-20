@@ -26,7 +26,7 @@ const DashboardView = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5001/api/analytics')
+        fetch('https://civicsync-so4u.onrender.com/api/analytics')
             .then(res => {
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 return res.json();

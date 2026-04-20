@@ -18,7 +18,7 @@ const currentUser = {
 const PostCard = ({ post, onLikeToggle }) => {
     // This logic now correctly handles both external URLs and internal server paths.
     const imageUrl = post.image_url
-      ? (post.image_url.startsWith('http') ? post.image_url : `http://localhost:5001${post.image_url}`)
+      ? (post.image_url.startsWith('http') ? post.image_url : `https://civicsync-so4u.onrender.com${post.image_url}`)
       : "https://placehold.co/600x400/e2e8f0/64748b?text=CivicSync";
     
     const timeAgo = (date) => {
@@ -135,7 +135,7 @@ export default function CommunityBlogPage() {
         try {
             setError(null);
             setLoading(true);
-            const response = await fetch('http://localhost:5001/api/posts');
+            const response = await fetch('https://civicsync-so4u.onrender.com/api/posts');
             if (!response.ok) throw new Error('Failed to fetch posts from the server.');
             const data = await response.json();
             setPosts(data.map(post => ({ ...post, isLiked: false }))); // isLiked is managed locally
@@ -161,7 +161,7 @@ export default function CommunityBlogPage() {
         }
 
         try {
-            const response = await fetch('http://localhost:5001/api/posts', {
+            const response = await fetch('https://civicsync-so4u.onrender.com/api/posts', {
                 method: 'POST',
                 body: formData,
             });
@@ -183,7 +183,7 @@ export default function CommunityBlogPage() {
         
         try {
             if (!isCurrentlyLiked) {
-                 await fetch(`http://localhost:5001/api/posts/${postId}/like`, { method: 'PUT' });
+                 await fetch(`https://civicsync-so4u.onrender.com/api/posts/${postId}/like`, { method: 'PUT' });
             }
         } catch (err) {
             console.error("Failed to update like status:", err);
