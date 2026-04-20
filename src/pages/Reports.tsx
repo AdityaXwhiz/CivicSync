@@ -95,11 +95,17 @@ export default function Reports() {
         ) : (
           reports.map((report) => {
             let imageUrls: string[] = [];
-            if (report.image_urls && typeof report.image_urls === 'string') {
-              try {
-                imageUrls = JSON.parse(report.image_urls);
-              } catch (e) { 
-                console.error("Could not parse image_urls for report ID:", report.id, e); 
+
+            // Handle both stringified JSON and already-parsed arrays
+            if (report.image_urls) {
+              if (typeof report.image_urls === 'string') {
+                try {
+                  imageUrls = JSON.parse(report.image_urls);
+                } catch (e) {
+                  console.error("Could not parse image_urls for report ID:", report.id, e);
+                }
+              } else if (Array.isArray(report.image_urls)) {
+                imageUrls = report.image_urls;
               }
             }
 
@@ -141,9 +147,14 @@ export default function Reports() {
                         <Label className="text-xs font-semibold text-muted-foreground">Image Evidence</Label>
                         <div className="flex gap-2 overflow-x-auto pt-2 pb-2">
                           {imageUrls.map((path: string, index: number) => (
-                            <a href={`https://civicsync-so4u.onrender.com${path}`} target="_blank" rel="noopener noreferrer" key={index}>
+                            <a
+                              href={path.startsWith('http') ? path : `https://civicsync-so4u.onrender.com${path}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              key={index}
+                            >
                               <img
-                                src={`https://civicsync-so4u.onrender.com${path}`}
+                                src={path.startsWith('http') ? path : `https://civicsync-so4u.onrender.com${path}`}
                                 alt={`Report image ${index + 1}`}
                                 className="h-28 w-28 object-cover rounded-md border hover:opacity-80 transition-opacity"
                               />
