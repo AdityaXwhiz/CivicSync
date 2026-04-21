@@ -44,7 +44,15 @@ const getFirstImageUrl = (report: Report): string | null => {
         urls = [image_urls];
     }
 
-    if (urls.length > 0 && urls[0]) return `https://civicsync-so4u.onrender.com${urls[0]}`;
+    if (urls.length > 0 && urls[0]) {
+    const url = urls[0];
+
+    // if already full URL
+    if (url.startsWith("http")) return url;
+
+    // fix relative path
+    return `https://civicsync-so4u.onrender.com${url.startsWith("/") ? url : "/" + url}`;
+}
     return null;
 };
 
